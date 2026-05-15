@@ -1,0 +1,35 @@
+name: Preprocessing Automation
+
+on:
+  push:
+    paths:
+      - 'dataset_raw/**'
+      - 'preprocessing/automate_BasoRizkyHamdana.py'
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas numpy
+
+      - name: Run preprocessing
+        run: |
+          python preprocessing/automate_BasoRizkyHamdana.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add preprocessing/titanic_preprocessing/titanic_cleaned.csv
+          git commit -m "Automated preprocessing" || echo "No changes to commit"
+          git push

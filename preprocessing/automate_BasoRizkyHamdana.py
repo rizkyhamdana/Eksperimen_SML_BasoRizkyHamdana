@@ -56,3 +56,6 @@ if __name__ == "__main__":
         print(f"Preprocessing selesai! Data disimpan di: {output_file}")
     except Exception as e:
         print(f"Terjadi kesalahan: {e}")
+
+
+# Triggering automation test
